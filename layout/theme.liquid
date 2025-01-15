@@ -48,6 +48,26 @@
     %}
 
     {% style %}
+      @font-face {
+        font-family: 'Beatrice_Regular';
+        src: url({{'beatrice-regular.woff2'|asset_url}}) format('woff2'),
+          url({{'beatrice-regular.woff'|asset_url}}) format('woff');
+      }
+
+      @font-face {
+        font-family: 'Beatrice_Bold';
+        src: url({{'beatrice-bold.woff2'|asset_url}}) format('woff2'),
+          url({{'beatrice-bold.woff'|asset_url}}) format('woff');
+      }
+
+      @font-face {
+        font-family: 'Cambon_Light';
+        src: url({{'cambon-light.woff2'|asset_url}}) format('woff2'),
+          url({{'cambon-light.woff'|asset_url}}) format('woff');
+      }
+    {% endstyle %}
+
+    {% style %}
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
       {{ body_font_bold | font_face: font_display: 'swap' }}
       {{ body_font_italic | font_face: font_display: 'swap' }}
@@ -100,12 +120,14 @@
       }
 
       :root {
-        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        /* --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}; */
+        --font-body-family: "Cambon_Light", serif;
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
         --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
 
-        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        /* --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }}; */
+        --font-heading-family: "Beatrice_Regular", sans-serif;
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
 
