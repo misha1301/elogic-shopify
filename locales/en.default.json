@@ -282,10 +282,10 @@
       "announcement_bar": "Announcement bar"
     },
     "time_countdown_banner": {
-      "days": "Days",
-      "hours": "Hours",
-      "minutes": "Minutes",
-      "seconds": "Seconds",
+      "days": "Day",
+      "hours": "Hour",
+      "minutes": "Min",
+      "seconds": "Sec",
     },
     "header": {
       "announcement": "Announcement",

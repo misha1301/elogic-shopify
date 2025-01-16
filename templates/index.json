@@ -64,7 +64,7 @@
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": false,
-        "show_vendor": false,
+        "show_vendor": true,
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
@@ -108,7 +108,7 @@
         "image": "shopify://shop_images/countdown-baner-image_ba3fdaac-b7da-4142-a1b4-b26b84909f6c.png",
         "image_overlay_opacity": 0,
         "image_height": "small",
-        "desktop_content_position": "middle-center",
+        "desktop_content_position": "middle-left",
         "show_text_box": false,
         "desktop_content_alignment": "left",
         "color_scheme": "scheme-3",
@@ -118,7 +118,7 @@
         "show_countdown_timer": true,
         "show_timer_expired": false,
         "countdown_timer_title": "",
-        "end_time_date": "02/12/2025 21:03:00"
+        "end_time_date": "01/16/2025 2:59:00"
       }
     },
     "featured_collection_TbWPyV": {
@@ -244,11 +244,11 @@
     }
   },
   "order": [
+    "collage_aKtw6N",
     "image_banner",
     "featured_collection",
     "time_countdown_banner",
     "featured_collection_TbWPyV",
     "collection_list_eTekMj",
-    "collage_aKtw6N"
   ]
 }

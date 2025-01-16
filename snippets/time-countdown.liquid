@@ -1,37 +1,61 @@
 {% if end_date != blank %}
-  <div class="countdown-timer__block {% if show_expired %} timer_show_expired {% endif %}" id="timer-{{section_id}}">
+  <div class="countdown-timer__block  {% if show_expired %} timer_show_expired {% endif %}" id="timer-{{section_id}}">
     {% if title != blank %}
       <h3 class="timer__title">{{ title }}</h3>
     {% endif %}
     <div class="timer-display" id="timer-display-{{section_id}}">
       <div class="timer-block">
-        <h3 class="timer-block__num js-timer-days">00</h3>
-        <span class="timer-block__unit rte body">{{ 'sections.time_countdown_banner.days' | t }}</span>
+        <p class="timer-block__num js-timer-days h5">00</p>
+        <span class="timer-block__unit">
+          {{- 'sections.time_countdown_banner.days' | t | upcase -}}
+        </span>
       </div>
       <div class="timer-block">
-        <h3 class="timer-block__num js-timer-hours">00</h3>
-        <span class="timer-block__unit rte body">{{ 'sections.time_countdown_banner.hours' | t }}</span>
+        <p class="timer-block__num js-timer-hours h5">00</p>
+        <span class="timer-block__unit">
+          {{- 'sections.time_countdown_banner.hours' | t | upcase -}}
+        </span>
       </div>
       <div class="timer-block">
-        <h3 class="timer-block__num js-timer-minutes">00</h3>
-        <span class="timer-block__unit rte body">{{ 'sections.time_countdown_banner.minutes' | t }}</span>
+        <p class="timer-block__num js-timer-minutes h5">00</p>
+        <span class="timer-block__unit">
+          {{- 'sections.time_countdown_banner.minutes' | t | upcase -}}
+        </span>
       </div>
       <div class="timer-block">
-        <h3 class="timer-block__num js-timer-seconds">00</h3>
-        <span class="timer-block__unit rte body">{{ 'sections.time_countdown_banner.seconds' | t }}</span>
+        <p class="timer-block__num js-timer-seconds h5">00</p>
+        <span class="timer-block__unit">
+          {{- 'sections.time_countdown_banner.seconds' | t | upcase -}}
+        </span>
       </div>
     </div>
   </div>
   {%- style -%}
-    #timer-{{section_id}}{
-      /* background: gray; */
+    .countdown-timer__block {
+      margin-right: -1.4rem;
     }
     .timer--expired:not(.timer_show_expired) {
       display: none;
     }
+    .timer-display {
+      font-family: var(--font-body-family);
+    }
     .timer__title {
       text-align: center;
-      font-weight: 800;
+      font-weight: inherit;
+    }
+    .timer-block__num,
+    .timer-block__unit {
+      margin: 0;
+      display: block;
+      text-align: center;
+      word-break: keep-all;
+    }
+    .timer-block__num {
+      font-weight: 400;
+      font-size: 2.8rem;
+      letter-spacing: 1.4rem;
+      line-height: 4.8rem;
     }
     .timer-display {
       display: -webkit-box;
@@ -41,26 +65,47 @@
       -ms-flex-pack: justify;
       justify-content: space-between;
       margin-top: 5px;
-      min-width: fit-content;
     }
     .timer-block {
       position: relative;
-      flex-grow: 1;
-      min-width: fit-content;
-      padding: 0 10px;
+      max-width: fit-content;
+      padding: 0 1.2rem;
     }
-    .timer-block:not(:last-child):after {
+    .timer-block:not(:last-child)::after {
       content: ':';
       position: absolute;
       right: 0;
-      top: 3px;
+      top: 0;
+      font-weight: 400;
+      font-size: 4rem;
+      line-height: 4rem;
+      color: rgb(var(--color-foreground));
     }
-    .timer-block__num,
     .timer-block__unit {
-      margin: 0;
-      display: block;
-      text-align: center;
+      margin-top: 0.6rem;
+      font-weight: 300;
+      font-size: 1.2rem;
+      margin-left: -1.4rem;
+      color: rgb(var(--color-foreground));
+    }
 
+    @media screen and (max-width: 750px) {
+      .timer-block__num {
+        font-size: 2rem;
+        letter-spacing: 1.2rem;
+        line-height: 4rem;
+        /* margin: 0; */
+      }
+      .timer-block__unit {
+        font-size: 1.2rem;
+        margin-left: -1.2rem;
+      }
+      .timer-block:not(:last-child)::after {
+        right: 0.3rem;
+        top: 0;
+        font-size: 2rem;
+        line-height: 3.5rem;
+      }
     }
   {%- endstyle -%}
 
@@ -76,28 +121,30 @@
 
     if (gapDate < 0) {
       markTimerAsExpired('timer-{{section_id}}');
+    } else {
+      markTimerAsUnexpired('timer-{{section_id}}');
+
+      var x = setInterval(function () {
+        countDate = new Date('{{end_date}}').getTime();
+        nowDate = new Date().getTime();
+        gapDate = countDate - nowDate;
+
+        const [days, hours, minutes, seconds] = countDownTime(gapDate, [day, hour, minute, second]);
+
+        if (gapDate < 0) {
+          markTimerAsExpired('timer-{{section_id}}');
+        } else {
+          document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-days').innerText =
+            days < 10 ? '0' + days : days;
+          document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-hours').innerText =
+            hours < 10 ? '0' + hours : hours;
+          document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-minutes').innerText =
+            minutes < 10 ? '0' + minutes : minutes;
+          document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-seconds').innerText =
+            seconds < 10 ? '0' + seconds : seconds;
+        }
+      }, second);
     }
-
-    var x = setInterval(function () {
-      countDate = new Date('{{end_date}}').getTime();
-      nowDate = new Date().getTime();
-      gapDate = countDate - nowDate;
-
-      const [days, hours, minutes, seconds] = countDownTime(gapDate, [day, hour, minute, second]);
-
-      if (gapDate < 0) {
-        markTimerAsExpired('timer-{{section_id}}');
-      } else {
-        document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-days').innerText =
-          days < 10 ? '0' + days : days;
-        document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-hours').innerText =
-          hours < 10 ? '0' + hours : hours;
-        document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-minutes').innerText =
-          minutes < 10 ? '0' + minutes : minutes;
-        document.querySelector('#timer-display-{{section_id}}').querySelector('.js-timer-seconds').innerText =
-          seconds < 10 ? '0' + seconds : seconds;
-      }
-    }, second);
 
     function countDownTime(gapDate, [day, hour, minute, second]) {
       const countedDays = Math.floor(gapDate / day);
@@ -110,6 +157,11 @@
     function markTimerAsExpired(id) {
       var timer_block = document.getElementById(id);
       timer_block.classList.add('timer--expired');
+    }
+
+    function markTimerAsUnexpired(id) {
+      var timer_block = document.getElementById(id);
+      timer_block.classList.remove('timer--expired');
     }
   </script>
 {% endif %}
