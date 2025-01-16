@@ -621,6 +621,66 @@
       }
     ]
   },
+
+
+  {
+    "name": "Product Card Swatches",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "card_swatches",
+        "default": false,
+        "label": "Enable Product Card Swatches"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_swatch_lazy_load",
+        "default": false,
+        "label": "Lazy Load Variant Images"
+      },
+      {
+        "type": "text",
+        "id": "card_variant_option_name",
+        "label": "Variant Option Name",
+        "default": "Color"
+      },
+      {
+        "type": "text",
+        "id": "card_variant_swatch_metaobject",
+        "label": "Default Variant Swatch Map Metaobject",
+        "default": "variant-swatch-mapping",
+        "info": "Can be overridden with product metafield"
+      },
+      {
+        "id": "card_swatch_shape_custom",
+        "label": "Swatch Shape",
+        "type": "select",
+        "options": [
+          {
+            "value": "circle",
+            "label": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.options__1.label"
+          },
+          {
+            "value": "square",
+            "label": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.options__2.label"
+          }
+        ],
+        "default": "circle"
+      },
+      {
+        "type": "range",
+        "id": "card_swatch_size_custom",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Swatch Size",
+        "default": 30
+      }
+    ]
+  },
+
+
   {
     "name": "t:settings_schema.collection_cards.name",
     "settings": [

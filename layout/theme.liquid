@@ -39,6 +39,10 @@
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+    {% if settings.card_swatches %}
+      <script src="{{ 'card-product-variant-selection-custom.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
+
     {{ content_for_header }}
 
     {%- liquid
