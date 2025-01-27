@@ -44,13 +44,6 @@
     }
 
   }
-
-  /* .collection-list-wrapper {
-    --grid-desktop-horizontal-spacing: 3.3rem;
-    --grid-desktop-vertical-spacing: 3.3rem;
-    --grid-mobile-horizontal-spacing: 2.9rem;
-    --grid-mobile-vertical-spacing: 2.9rem;
-  } */
 {%- endstyle -%}
 
 {%- liquid
@@ -100,9 +93,9 @@
       class="
         collection-slider-component
         slider-mobile-gutter
-        {% if section.settings.full_width %} slider-component-full-width {% endif %} {% comment %}{% endcomment %}
+        {% if section.settings.full_width %} slider-component-full-width {% endif %}
 
-        {% if show_mobile_slider == false %} page-width {% endif %}{% comment %}{% endcomment %}
+        {% if show_mobile_slider == false %} page-width {% endif %}
         {% if show_desktop_slider == false and section.settings.full_width == false %} page-width-desktop {% endif %}
 
         {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}

@@ -134,14 +134,6 @@
   flex-grow: 1;
 }
 
-/* .card__content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-} */
-
 .card__content--auto-margins {
   grid-template-rows: minmax(0, auto) max-content minmax(0, auto);
 }
@@ -151,13 +143,6 @@
   padding: 1.6rem 1rem;
   width: 100%;
 }
-
-/* .card__information {
-  display: flex;
-  flex-direction: column;
-  padding: 1.3rem 1rem;
-  width: 100%;
-} */
 
 .card:not(.ratio) > .card__content {
   grid-template-rows: max-content minmax(0, 1fr) max-content auto;

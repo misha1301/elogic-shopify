@@ -736,8 +736,7 @@ class SliderComponent extends HTMLElement {
 
     this.areSwitchButtonsAvailable = true;
 
-    // if (!this.slider || !this.nextButton) return; //delete
-    if (!this.slider) return; //delete
+    if (!this.slider) return; 
 
     if (this.prevButton && this.nextButton) {
       this.prevButton.addEventListener('click', this.onButtonClick.bind(this));
@@ -1082,17 +1081,6 @@ class SlideshowComponent extends SliderComponent {
       nextSlide.classList.remove(`${animationClassIn}-${direction}`);
     }, this.announcerBarAnimationDelay * 2);
   }
-
-  // linkToSlide(event) {
-  //   event.preventDefault();
-  //   const slideScrollPosition =
-  //     this.slider.scrollLeft +
-  //     this.sliderFirstItemNode.clientWidth *
-  //       (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
-  //   this.slider.scrollTo({
-  //     left: slideScrollPosition,
-  //   });
-  // }
 }
 
 customElements.define('slideshow-component', SlideshowComponent);
