@@ -787,6 +787,24 @@
         "enable_desktop_slider": {
           "label": "Enable carousel on desktop"
         },
+        "slider_visual": {
+          "label": "Pagination style",
+          "options__1": {
+            "label": "Counter"
+          },
+          "options__2": {
+            "label": "Dots"
+          },
+          "options__3": {
+            "label": "Numbers"
+          }
+        },
+        "enable_slider_buttons":{
+          "label": "Enable slider buttons"
+        },
+        "enable_slider_looping":{
+          "label": "Enable slider looping"
+        },
         "full_width": {
           "label": "Make products full width"
         },
