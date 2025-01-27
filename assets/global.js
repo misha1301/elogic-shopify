@@ -723,20 +723,42 @@ class SliderComponent extends HTMLElement {
     this.slider = this.querySelector('[id^="Slider-"]');
     this.sliderItems = this.querySelectorAll('[id^="Slide-"]');
     this.enableSliderLooping = false;
+
+    this.sliderControlWrapper = this.querySelector('.slider-buttons');
+    if (!this.sliderControlWrapper) return; 
+
     this.currentPageElement = this.querySelector('.slider-counter--current');
     this.pageTotalElement = this.querySelector('.slider-counter--total');
     this.prevButton = this.querySelector('button[name="previous"]');
     this.nextButton = this.querySelector('button[name="next"]');
 
-    if (!this.slider || !this.nextButton) return;
+    this.sliderLableWrapper = this.querySelector('.slideshow__control-wrapper');
+
+    this.areSwitchButtonsAvailable = true;
+
+    // if (!this.slider || !this.nextButton) return; //delete
+    if (!this.slider) return; //delete
+
+    if (this.prevButton && this.nextButton) {
+      this.prevButton.addEventListener('click', this.onButtonClick.bind(this));
+      this.nextButton.addEventListener('click', this.onButtonClick.bind(this));
+    }else{
+      this.areSwitchButtonsAvailable = false;
+    }
 
     this.initPages();
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);
 
+    if (this.sliderLableWrapper){
+      this.sliderControlLinksArray = Array.from(this.sliderControlWrapper.querySelectorAll('.slider-counter__link'));
+      this.sliderControlLinksArray.forEach((link) => link.addEventListener('click', this.linkToSlide.bind(this)));
+    }
+
+    this.sliderFirstItemNode = this.slider.querySelector('.slider__slide');
+    
+    if (this.sliderItemsToShow.length > 0) this.currentPage = 1;
     this.slider.addEventListener('scroll', this.update.bind(this));
-    this.prevButton.addEventListener('click', this.onButtonClick.bind(this));
-    this.nextButton.addEventListener('click', this.onButtonClick.bind(this));
   }
 
   initPages() {
@@ -758,7 +780,8 @@ class SliderComponent extends HTMLElement {
   update() {
     // Temporarily prevents unneeded updates resulting from variant changes
     // This should be refactored as part of https://github.com/Shopify/dawn/issues/2057
-    if (!this.slider || !this.nextButton) return;
+    // if (!this.slider || !this.nextButton) return; //delete
+    if (!this.slider) return; //delete
 
     const previousPage = this.currentPage;
     this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
@@ -779,19 +802,31 @@ class SliderComponent extends HTMLElement {
       );
     }
 
-    if (this.enableSliderLooping) return;
+    if (!this.enableSliderLooping)
+    if (this.areSwitchButtonsAvailable){
+      if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
+        this.prevButton.setAttribute('disabled', 'disabled');
+      } else {
+        this.prevButton.removeAttribute('disabled');
+      }
 
-    if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
-      this.prevButton.setAttribute('disabled', 'disabled');
-    } else {
-      this.prevButton.removeAttribute('disabled');
+      if (this.isSlideVisible(this.sliderItemsToShow[this.sliderItemsToShow.length - 1])) {
+        this.nextButton.setAttribute('disabled', 'disabled');
+      } else {
+        this.nextButton.removeAttribute('disabled');
+      }
     }
 
-    if (this.isSlideVisible(this.sliderItemsToShow[this.sliderItemsToShow.length - 1])) {
-      this.nextButton.setAttribute('disabled', 'disabled');
-    } else {
-      this.nextButton.removeAttribute('disabled');
-    }
+    this.sliderControlButtons = this.querySelectorAll('.slider-counter__link');
+
+    if (!this.sliderControlButtons.length) return;
+
+    this.sliderControlButtons.forEach((link) => {
+      link.classList.remove('slider-counter__link--active');
+      link.removeAttribute('aria-current');
+    });
+    this.sliderControlButtons[this.currentPage - 1].classList.add('slider-counter__link--active');
+    this.sliderControlButtons[this.currentPage - 1].setAttribute('aria-current', true);
   }
 
   isSlideVisible(element, offset = 0) {
@@ -814,8 +849,21 @@ class SliderComponent extends HTMLElement {
       left: position,
     });
   }
-}
 
+  linkToSlide(event) {
+    console.log("Client width: ",this.sliderFirstItemNode.clientWidth);
+    console.log("Item offset: ",this.sliderItemOffset);
+    event.preventDefault();
+    const slideScrollPosition =
+      this.slider.scrollLeft +
+      this.sliderItemOffset *
+        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+    this.slider.scrollTo({
+      left: slideScrollPosition,
+    });
+  }
+}
+ 
 customElements.define('slider-component', SliderComponent);
 
 class SlideshowComponent extends SliderComponent {
@@ -825,6 +873,9 @@ class SlideshowComponent extends SliderComponent {
     this.enableSliderLooping = true;
 
     if (!this.sliderControlWrapper) return;
+
+    if(!this.areSwitchButtonsAvailable)
+      this.enableSliderLooping = false;
 
     this.sliderFirstItemNode = this.slider.querySelector('.slideshow__slide');
     if (this.sliderItemsToShow.length > 0) this.currentPage = 1;
@@ -846,15 +897,17 @@ class SlideshowComponent extends SliderComponent {
         if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay();
       });
 
-      [this.prevButton, this.nextButton].forEach((button) => {
-        button.addEventListener(
-          'click',
-          () => {
-            this.announcementBarArrowButtonWasClicked = true;
-          },
-          { once: true }
-        );
-      });
+      if(this.areSwitchButtonsAvailable){
+        [this.prevButton, this.nextButton].forEach((button) => {
+          button.addEventListener(
+            'click',
+            () => {
+              this.announcementBarArrowButtonWasClicked = true;
+            },
+            { once: true }
+          );
+        });
+      }
     }
 
     if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay();
@@ -912,17 +965,9 @@ class SlideshowComponent extends SliderComponent {
 
   update() {
     super.update();
-    this.sliderControlButtons = this.querySelectorAll('.slider-counter__link');
+
+    if(this.enableSliderLooping && this.areSwitchButtonsAvailable)
     this.prevButton.removeAttribute('disabled');
-
-    if (!this.sliderControlButtons.length) return;
-
-    this.sliderControlButtons.forEach((link) => {
-      link.classList.remove('slider-counter__link--active');
-      link.removeAttribute('aria-current');
-    });
-    this.sliderControlButtons[this.currentPage - 1].classList.add('slider-counter__link--active');
-    this.sliderControlButtons[this.currentPage - 1].setAttribute('aria-current', true);
   }
 
   autoPlayToggle() {
@@ -1038,16 +1083,16 @@ class SlideshowComponent extends SliderComponent {
     }, this.announcerBarAnimationDelay * 2);
   }
 
-  linkToSlide(event) {
-    event.preventDefault();
-    const slideScrollPosition =
-      this.slider.scrollLeft +
-      this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
-    this.slider.scrollTo({
-      left: slideScrollPosition,
-    });
-  }
+  // linkToSlide(event) {
+  //   event.preventDefault();
+  //   const slideScrollPosition =
+  //     this.slider.scrollLeft +
+  //     this.sliderFirstItemNode.clientWidth *
+  //       (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+  //   this.slider.scrollTo({
+  //     left: slideScrollPosition,
+  //   });
+  // }
 }
 
 customElements.define('slideshow-component', SlideshowComponent);
