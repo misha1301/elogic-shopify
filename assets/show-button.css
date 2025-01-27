@@ -1,0 +1,84 @@
+button-wrapper {
+  --card-content-width: calc(100% - 2 * (var(--image-padding) + 1rem));
+  position: absolute;
+  width: var(--card-content-width);
+  right: calc(var(--image-padding) + 1rem);
+  bottom: calc(var(--image-padding) + 1rem);
+  display: flex;
+  flex-direction: row;
+}
+
+.activate-button {
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: fit-content;
+  text-decoration: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.activate-button .svg-wrapper {
+  transition: transform 300ms ease;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.activate-button:hover {
+  cursor: pointer;
+}
+
+.activate-button:hover .svg-wrapper {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.125);
+}
+
+.hidden-modal {
+  display: none;
+  position: absolute;
+  width: max-content;
+  bottom: 0;
+  right: 0;
+  z-index: 4;
+}
+
+.hidden-modal .button {
+  text-decoration: none !important;
+  min-height: 3.6rem;
+  height: 3.6rem;
+  padding: 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+.hidden-modal.visible {
+  display: block;
+  animation: slideAnimation 350ms ease-out forwards;
+}
+
+@media screen and (max-width: 989px) {
+  .hidden-modal.visible {
+    display: none;
+  }
+}
+
+@keyframes slideAnimation {
+  0% {
+    right: var(--card-content-width);
+    opacity: 0;
+  }
+  80% {
+    right: 36px;
+    opacity: 1;
+  }
+  100% {
+    right: 40px;
+    opacity: 1;
+  }
+}
