@@ -20,14 +20,14 @@
 
 {% assign base_store_files_url = '//' | append: shop.permanent_domain | append: '/cdn/shop/files/' %}
 {% assign product_form_id = 'product-form-' | append: product.id %}
-
+ 
 <div class="collection-product-card__swatch-variants">
   {% for value in option.values %}
     {% assign variant_image_url = null %}
     {% assign variant_id = null %}
     {% assign option_disabled = true %}
     {% assign first_match_found = false %}
-
+    
     {% for variant in product.variants %}
       {% if first_match_found == false %}
         {% case option.position %}
@@ -106,6 +106,7 @@
               {% assign variant_image_url = base_store_files_url | append: item.variant_swatch %}
               {% assign swatch_found = true %}
             {% elsif item.variant_hex %}
+              {% assign color_hex = item.variant_hex  %}
               {% assign hex_color = item.variant_hex | replace: '#', '%23' %}
               {% assign svg = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect width="100%" height="100%" fill="'
                 | append: hex_color
@@ -131,6 +132,14 @@
       collection-{{ section.id }}-{{ product.id }}-{{ option.name }}-{{ option.position }}
     {%- endcapture -%}
 
+    {% comment %} 
+      {% if color_hex %}
+        {% assign label_color = color_hex %}
+      {% else %}
+        {% assign label_color = color | handleize %}
+      {% endif %} 
+    {% endcomment %}
+
     <div class="collection-product-card__swatch">
       <input
         type="radio"
@@ -152,7 +161,9 @@
         {% endif %}
       >
 
-      <label for="{{ input_id }}" style="background-color: {{ color | handleize | prepend: '' }};">
+      {% comment %} style="background-color: {{ label_color }};" {% endcomment %}
+
+      <label for="{{ input_id }}" style="background-image: url('{{ variant_image_url }}');">
         <span class="visually-hidden">{{ value | escape }}</span>
         <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
       </label>
