@@ -163,10 +163,16 @@
         {%- endcase -%}
       {%- endfor -%}
     </div>
-    <p>{{ section.location }}</p>
-    {% if product.handle == 'image_banner_count' %}
-      {% render 'time-countdown', title: 'Order Now with Discounted Pricing', end_date: 'Feb 12, 2025 20:00:00' %}
-    {% endif %}
+    {% comment %} <p>{{ section.location }}</p> {% endcomment %}
+    {% comment %} {% if product.handle == 'image_banner_count' %} {% endcomment %}
+    {% comment %}
+      {% render 'time-countdown',
+        title: 'Order Now with Discounted Pricing',
+        end_date: 'Feb 30, 2025 20:00:00',
+        section_id: section.id
+      %}
+    {% endcomment %}
+    {% comment %} {% endif %} {% endcomment %}
   </div>
 </div>
 
@@ -365,6 +371,7 @@
       "label": "t:sections.image-banner.settings.show_text_below.label"
     }
   ],
+
   "blocks": [
     {
       "type": "heading",

@@ -1,0 +1,504 @@
+.countdown-banner {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  z-index: auto;
+  isolation: isolate;
+}
+
+.countdown-banner__box {
+  display: flex;
+  column-gap: 1rem;
+  justify-content: space-between;
+}
+
+.countdown-block__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
+.countdown-banner__box.gradient {
+  transform: perspective(0);
+}
+
+@media only screen and (max-width: 749px) {
+  .countdown-banner--content-align-mobile-right .countdown-block__box {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .countdown-banner--content-align-mobile-left .countdown-block__box {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .countdown-banner__box {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .countdown-banner--content-align-right .countdown-block__box {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .countdown-banner--content-align-right .countdown-banner__box {
+    flex-direction: row-reverse;
+  }
+
+  .countdown-banner--content-align-left .countdown-block__box {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .countdown-banner--content-align-center .countdown-banner__box {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .countdown-banner--content-align-left.countdown-banner--desktop-transparent
+    .countdown-block__box,
+  .countdown-banner--content-align-right.countdown-banner--desktop-transparent
+    .countdown-block__box,
+  .countdown-banner--medium.countdown-banner--desktop-transparent
+    .countdown-block__box {
+    max-width: 68rem;
+  }
+}
+
+.countdown-banner__media.animate--zoom-in {
+  clip-path: inset(0px);
+}
+
+.countdown-banner__media.animate--zoom-in
+  > img:not(.zoom):not(.deferred-media__poster-button),
+.countdown-banner__media.animate--zoom-in
+  > svg:not(.zoom):not(.deferred-media__poster-button) {
+  position: fixed;
+  height: 100vh;
+}
+
+@media screen and (max-width: 749px) {
+  .countdown-banner--small.countdown-banner--mobile-bottom:not(
+      .countdown-banner--adapt
+    )
+    .countdown-banner__media,
+  .countdown-banner--small.countdown-banner--stacked:not(
+      .countdown-banner--mobile-bottom
+    ):not(.countdown-banner--adapt)
+    > .countdown-banner__media {
+    height: 20rem;
+  }
+
+  .countdown-banner--medium.countdown-banner--mobile-bottom:not(
+      .countdown-banner--adapt
+    )
+    .countdown-banner__media,
+  .countdown-banner--medium.countdown-banner--stacked:not(
+      .countdown-banner--mobile-bottom
+    ):not(.countdown-banner--adapt)
+    > .countdown-banner__media {
+    height: 25rem;
+  }
+
+  .countdown-banner--large.countdown-banner--mobile-bottom:not(
+      .countdown-banner--adapt
+    )
+    .countdown-banner__media,
+  .countdown-banner--large.countdown-banner--stacked:not(
+      .countdown-banner--mobile-bottom
+    ):not(.countdown-banner--adapt)
+    > .countdown-banner__media {
+    height: 35rem;
+  }
+
+  .countdown-banner--small:not(.countdown-banner--mobile-bottom):not(
+      .countdown-banner--adapt
+    )
+    .countdown-banner__content {
+    padding: 2.5rem 0rem;
+    min-height: 25rem;
+  }
+
+  .countdown-banner--medium:not(.countdown-banner--mobile-bottom):not(
+      .countdown-banner--adapt
+    )
+    .countdown-banner__content {
+    min-height: 30rem;
+    padding: 2.5rem 0rem;
+  }
+
+  .countdown-banner--large:not(.countdown-banner--mobile-bottom):not(
+      .countdown-banner--adapt
+    )
+    .countdown-banner__content {
+    min-height: 35rem;
+    padding: 2.5rem 0rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-banner {
+    flex-direction: row;
+  }
+
+  .countdown-banner--small:not(.countdown-banner--adapt) {
+    /* min-height: 42rem; */
+    min-height: 27rem;
+    padding: 2.5rem 0rem;
+  }
+
+  .countdown-banner--medium:not(.countdown-banner--adapt) {
+    min-height: 30rem;
+    padding: 2.5rem 0rem;
+  }
+
+  .countdown-banner--large:not(.countdown-banner--adapt) {
+    min-height: 35rem;
+    padding: 2.5rem 0rem;
+  }
+
+  .countdown-banner__content.countdown-banner__content--top-left {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .countdown-banner__content.countdown-banner__content--top-center {
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .countdown-banner__content.countdown-banner__content--top-right {
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  .countdown-banner__content.countdown-banner__content--middle-left {
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .countdown-banner__content.countdown-banner__content--middle-center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .countdown-banner__content.countdown-banner__content--middle-right {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .countdown-banner__content.countdown-banner__content--bottom-left {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .countdown-banner__content.countdown-banner__content--bottom-center {
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .countdown-banner__content.countdown-banner__content--bottom-right {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .countdown-banner:not(.countdown-banner--stacked) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.countdown-banner__media {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-banner__media {
+    height: 100%;
+  }
+}
+
+.countdown-banner--adapt,
+.countdown-banner--adapt_image.countdown-banner--mobile-bottom
+  .countdown-banner__media:not(.placeholder) {
+  height: auto;
+}
+
+@media screen and (max-width: 749px) {
+  .countdown-banner--mobile-bottom .countdown-banner__media {
+    position: relative;
+  }
+
+  .countdown-banner:not(.countdown-banner--mobile-bottom):not(
+      .email-signup-countdown-banner
+    )
+    .countdown-banner__box {
+    background: transparent;
+  }
+
+  .countdown-banner:not(.countdown-banner--mobile-bottom)
+    .countdown-banner__box {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .countdown-banner:not(.countdown-banner--mobile-bottom) .button--secondary {
+    --alpha-button-background: 0;
+  }
+
+  .countdown-banner::before {
+    display: none !important;
+  }
+}
+
+.countdown-banner__content {
+  padding: 0 1.5rem;
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-banner__content {
+    padding: 0 5rem;
+  }
+
+  .countdown-banner__content--top-left {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .countdown-banner__content--top-center {
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .countdown-banner__content--top-right {
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  .countdown-banner__content--middle-left {
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .countdown-banner__content--middle-center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .countdown-banner__content--middle-right {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .countdown-banner__content--bottom-left {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .countdown-banner__content--bottom-center {
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .countdown-banner__content--bottom-right {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .countdown-banner--mobile-bottom:not(.countdown-banner--stacked)
+    .countdown-banner__content {
+    order: 2;
+  }
+
+  .countdown-banner:not(.countdown-banner--mobile-bottom) .field__input,
+  .countdown-banner--mobile-bottom:not(.countdown-banner--stacked)
+    .countdown-banner__box.color-scheme-1 {
+    background: transparent;
+  }
+}
+
+.countdown-banner__box {
+  padding: 1rem 1.5rem;
+  position: relative;
+  height: fit-content;
+  align-items: center;
+  width: 100%;
+  word-wrap: break-word;
+  z-index: 1;
+}
+
+.countdown-banner--mobile-bottom .countdown-banner__box {
+  padding: 2rem 2.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-banner__box {
+    --margin-left: min(100vw, var(--page-width));
+    padding: 2rem 2.5rem;
+    margin: 0 clamp(0rem, calc((var(--margin-left) - 750px) * 0.2), 9rem);
+  }
+
+  .countdown-banner--desktop-transparent .countdown-banner__box {
+    padding: 0;
+    background: transparent;
+    max-width: 81rem;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .countdown-banner--desktop-transparent .button--secondary {
+    --alpha-button-background: 0;
+  }
+
+  .countdown-banner--desktop-transparent .content-container:after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .countdown-banner--mobile-bottom::after,
+  .countdown-banner--mobile-bottom .countdown-banner__media::after {
+    display: none;
+  }
+}
+
+.countdown-banner::after,
+.countdown-banner__media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  background: #000000;
+  opacity: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.countdown-block__box > * + .countdown-banner__text {
+  margin-top: 1.5rem;
+}
+
+.countdown-block__box .banner_text {
+  font-size: 2.4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-block__box > * + .countdown-banner__text {
+    margin-top: 2rem;
+  }
+
+  .countdown-block__box .banner_text {
+    font-size: 3.4rem;
+  }
+}
+
+.countdown-block__box > * + * {
+  margin-top: 1rem;
+}
+
+.countdown-block__box > *:first-child {
+  margin-top: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-banner__box {
+    width: auto;
+    max-width: 81rem;
+    min-width: 45rem;
+  }
+
+  .countdown-banner__box:has(.countdown-timer__block):first-child {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .countdown-banner__box {
+    max-width: 95rem;
+    width: 100%;
+  }
+}
+
+.countdown-banner__heading {
+  margin-bottom: 0;
+}
+
+.countdown-block__box .countdown-banner__heading + * {
+  margin-top: 1rem;
+}
+
+.countdown-banner__buttons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 45rem;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 749px) {
+  .countdown-banner--content-align-mobile-right {
+    justify-content: flex-end;
+  }
+
+  .countdown-banner--content-align-mobile-center > * {
+    flex-grow: 1;
+    min-width: 22rem;
+  }
+
+  .countdown-block__box > * + .countdown-banner__buttons {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-banner--content-align-center > * {
+    flex-grow: 1;
+    min-width: 22rem;
+  }
+
+  .countdown-banner--content-align-right {
+    justify-content: flex-end;
+  }
+
+  .countdown-block__box > * + .countdown-banner__buttons {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .countdown-banner:not(.slideshow) .rte a,
+  .countdown-banner:not(.slideshow) .inline-richtext a:hover,
+  .countdown-banner:not(.slideshow) .rte a:hover {
+    color: currentColor;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .countdown-banner--desktop-transparent .rte a,
+  .countdown-banner--desktop-transparent .inline-richtext a:hover,
+  .countdown-banner--desktop-transparent .rte a:hover {
+    color: currentColor;
+  }
+}
