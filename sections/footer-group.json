@@ -13,8 +13,42 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "brand_information_4Mc9XL": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
+        "link_list_ckJxb4": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "jewerly"
+          }
+        },
+        "link_list_HpecLj": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "main-menu"
+          }
+        },
+        "brand_information_PrjQ7j": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        }
+      },
+      "block_order": [
+        "brand_information_4Mc9XL",
+        "link_list_ckJxb4",
+        "link_list_HpecLj",
+        "brand_information_PrjQ7j"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": true,
