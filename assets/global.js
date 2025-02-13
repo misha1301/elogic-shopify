@@ -557,7 +557,7 @@ customElements.define('menu-drawer', MenuDrawer);
 class HeaderDrawer extends MenuDrawer {
   constructor() {
     super();
-  }
+  } 
 
   openMenuDrawer(summaryElement) {
     this.header = this.header || document.querySelector('.section-header');

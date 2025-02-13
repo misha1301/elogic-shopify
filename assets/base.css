@@ -924,8 +924,10 @@ summary::-webkit-details-marker {
 
 .text-body_2 {
   font-family: var(--font-body-family);
-  font-weight: 400;
+  font-weight: 300;
   font-size: calc(var(--font-heading-scale) * 1.4rem);
+  line-height: 2rem;
+  margin: 0;
 }
 
 @media only screen and (min-width: 750px) {
@@ -937,6 +939,7 @@ summary::-webkit-details-marker {
   }
   .text-body_2 {
     font-size: calc(var(--font-heading-scale) * 1.6rem);
+    line-height: 1.8rem;
   }
 }
 
@@ -1320,7 +1323,7 @@ button.shopify-payment-button__button--unbranded {
   right: var(--buttons-border-width);
   bottom: var(--buttons-border-width);
   left: var(--buttons-border-width);
-  z-index: 1;
+  /* z-index: 1; */
   border-radius: var(--buttons-radius);
   box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
       rgba(var(--color-button-text), var(--border-opacity)),
@@ -1694,8 +1697,7 @@ details[open] > .share-button__fallback {
 .field:after,
 .select:after,
 .customer .field:after,
-.customer select:after,
-.localization-form__select:after {
+.customer select:after {
   pointer-events: none;
   content: "";
   position: absolute;
