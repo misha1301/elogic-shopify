@@ -23,37 +23,35 @@
         "link_list_ckJxb4": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
+            "heading": "Discover",
             "menu": "jewerly"
           }
         },
         "link_list_HpecLj": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
+            "heading": "Support",
             "menu": "main-menu"
-          }
-        },
-        "brand_information_PrjQ7j": {
-          "type": "brand_information",
-          "settings": {
-            "show_social": true
           }
         }
       },
       "block_order": [
         "brand_information_4Mc9XL",
         "link_list_ckJxb4",
-        "link_list_HpecLj",
-        "brand_information_PrjQ7j"
+        "link_list_HpecLj"
       ],
       "settings": {
         "color_scheme": "scheme-3",
+        "social_color_scheme": "scheme-a0c82dbd-1f3f-4a41-b5df-aca242cc03dd",
+        "form_color_scheme": "scheme-faffbe9b-128b-4e37-b9d6-aef1266d2fb6",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "CALLING ALL DORINA SUPERFANS!",
+        "newsletter_subtitle": "Sign up to be the first to hear about new products and exclusive offers.",
         "enable_follow_on_shop": true,
+        "form_button_lable": "SUBSCRIBE",
         "show_social": true,
-        "enable_country_selector": true,
+        "social_lable": "FOLLOW US",
+        "enable_country_selector": false,
         "enable_language_selector": true,
         "payment_enable": true,
         "show_policy": true,
