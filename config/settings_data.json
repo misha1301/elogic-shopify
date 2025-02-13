@@ -282,7 +282,7 @@
         "settings": {
           "background": "rgba(0,0,0,0)",
           "background_gradient": "",
-          "text": "#1f727c",
+          "text": "#ffffff",
           "button": "#1f727c",
           "button_label": "#1f727c",
           "secondary_button_label": "#ffffff",

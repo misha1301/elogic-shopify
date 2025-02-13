@@ -133,8 +133,8 @@
                       {%- endif -%}
                       {%- if block.settings.show_social and has_social_icons -%}
                         <div class="social-list-wrapper color-{{ section.settings.social_color_scheme }}">
-                          {% if settings.social_lable != blank %}
-                            <h6 class="subtitle_2 social-list-lable h-spacing">{{ settings.social_lable }}</h6>
+                          {% if section.settings.social_lable != blank %}
+                            <h6 class="subtitle_2 social-list-lable h-spacing">{{ section.settings.social_lable }}</h6>
                           {%- endif -%}
                           {%- render 'social-icons', class: 'footer__list-social' -%}
                         </div>
