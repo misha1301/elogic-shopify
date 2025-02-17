@@ -84,6 +84,11 @@ document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
   summary.parentElement.addEventListener('keyup', onKeyUpEscape);
 });
 
+const menu_search = document.querySelectorAll('#header-menu__icon--search').forEach((search) => {
+  search.addEventListener('click', onClickEscape);
+})
+
+
 const trapFocusHandlers = {};
 
 function trapFocus(container, elementToFocus = container) {
@@ -193,7 +198,7 @@ function pauseAllMedia() {
     if (model.modelViewerUI) model.modelViewerUI.pause();
   });
 }
-
+ 
 function removeTrapFocus(elementToFocus = null) {
   document.removeEventListener('focusin', trapFocusHandlers.focusin);
   document.removeEventListener('focusout', trapFocusHandlers.focusout);
@@ -203,6 +208,7 @@ function removeTrapFocus(elementToFocus = null) {
 }
 
 function onKeyUpEscape(event) {
+  console.log("was clicked")
   if (event.code.toUpperCase() !== 'ESCAPE') return;
 
   const openDetailsElement = event.target.closest('details[open]');
@@ -212,6 +218,17 @@ function onKeyUpEscape(event) {
   openDetailsElement.removeAttribute('open');
   summaryElement.setAttribute('aria-expanded', false);
   summaryElement.focus();
+}
+
+function onClickEscape(event) {
+  const openDetailsElement = document.querySelector('header-drawer');
+  if (!openDetailsElement) return;
+  
+  openDetailsElement.closeMenuDrawer(event, openDetailsElement.querySelector('summary'));
+  openDetailsElement.querySelector('details summary').setAttribute('aria-expanded', false);
+
+  const searchModal = document.querySelector('details-modal');
+  searchModal.open();
 }
 
 class QuantityInput extends HTMLElement {

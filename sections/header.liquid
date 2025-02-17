@@ -38,7 +38,7 @@
 
   .list-menu {
     list-style: none;
-    padding: 0;
+    padding: 0 1.6rem;
     margin: 0;
   }
 
@@ -68,6 +68,15 @@
     .list-menu__item--link {
       padding-bottom: 0.5rem;
       padding-top: 0.5rem;
+    }
+
+    .menu-drawer-wrapper {
+      padding: 2.8rem;
+      margin: 0;
+    }
+
+    .menu-drawer__inner-submenu .list-menu{
+      padding: 0;
     }
   }
 </style>
@@ -209,7 +218,7 @@
                 <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
                 {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
               </div>
-            {%- endform -%}
+            {%- endform -%} 
           </localization-form>
         {% endif %}
 
