@@ -121,7 +121,7 @@
                             </div>
                           </div>
                           <button
-                            class="menu-drawer__close-button uppercase h-spacing link link--text focus-inset"
+                            class="menu-drawer__close-button uppercase h-spacing link link--text"
                             aria-expanded="true"
                           >
                             <span class="svg-wrapper">
@@ -229,7 +229,7 @@
             {%- if shop.customer_accounts_enabled -%}
               <a
                 href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-                class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide"
+                class="menu-drawer__account uppercase link focus-inset h5 medium-hide large-up-hide"
                 rel="nofollow"
               >
                 {%- if section.settings.enable_customer_avatar -%}
