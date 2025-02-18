@@ -131,12 +131,11 @@
                           </button>
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                             <li>
-                              <a
-                                href="{{ childlink.url }}"
+                              <h2
                                 class="current_link-title uppercase h-spacing full-unstyled-link"
                               >
                                 {{ link.title | escape }}
-                              </a>
+                              </h2>
                             </li>
                             {%- for childlink in link.links -%}
                               <li>

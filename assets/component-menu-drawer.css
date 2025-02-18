@@ -252,10 +252,13 @@ details[open].menu-opening > .menu-drawer__submenu {
 .current_link-title {
   border-top: 1px solid rgb(var(--color-foreground), 0.35);
   font-family: var(--font-heading-family);
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 2rem;
   padding: 2rem;
+  width: 100%;
 }
 
 .menu-drawer__close-button .svg-wrapper {
