@@ -2457,6 +2457,9 @@ input[type="checkbox"] {
   .header--has-app {
     grid-template-columns: auto 1fr auto;
   }
+  .header > .header__icons .swym-header-launcher {
+    display: none !important;
+  }
 }
 
 @media screen and (min-width: 990px) {
@@ -2613,6 +2616,11 @@ input[type="checkbox"] {
   overflow: hidden;
 }
 
+.swym-header-launcher {
+  margin: 0 !important;
+}
+
+.swym-header-launcher > .swym-header-launcher-icon,
 .header__icon:not(.header__icon--summary),
 .header__icon span {
   display: flex;
@@ -2627,7 +2635,7 @@ input[type="checkbox"] {
 .header__icon span {
   height: 100%;
 }
-
+.swym-header-launcher > .swym-header-launcher-icon,
 .header__icon .svg-wrapper {
   width: 44px;
   height: 44px;
@@ -2636,12 +2644,13 @@ input[type="checkbox"] {
 .header__icon::after {
   content: none;
 }
-
+.swym-header-launcher:hover svg,
 .header__icon:hover .icon,
 .modal__close-button:hover .icon {
   transform: scale(1.07);
 }
 
+.swym-header-launcher > .swym-header-launcher-ico > svg,
 .header__icon .icon {
   height: 2rem;
   width: 2rem;
@@ -2649,8 +2658,9 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
+.swym-header-launcher,
 .header__icon,
-.header__icon--cart .icon {
+.header__icon--cart {
   height: 4.4rem;
   width: 4.4rem;
   padding: 0;

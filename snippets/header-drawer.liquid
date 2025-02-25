@@ -255,6 +255,15 @@
                 -%}
               </a>
             {%- endif -%}
+
+            {%- if shop.customer_accounts_enabled -%}
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when '@app' -%}
+                    {% render block %}
+                {%- endcase -%}
+              {%- endfor -%}
+            {%- endif -%}
           </div>
         </div>
       </div>
