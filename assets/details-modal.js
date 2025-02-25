@@ -17,16 +17,21 @@ class DetailsModal extends HTMLElement {
 
   onSummaryClick(event) {
     event.preventDefault();
-    event.target.closest('details').hasAttribute('open') ? this.close() : this.open(event);
+    event.target.closest('details').hasAttribute('open') ? this.close() : this.open();
   }
 
   onBodyClick(event) {
     if (!this.contains(event.target) || event.target.classList.contains('modal-overlay')) this.close(false);
   }
 
-  open(event) {
-    this.onBodyClickEvent = this.onBodyClickEvent || this.onBodyClick.bind(this);
-    event.target.closest('details').setAttribute('open', true);
+  onModaslOverlayClick(event) {
+    if (event.target.classList.contains('modal-overlay')) this.close(false);
+  }
+
+  open() {
+    console.log(this.detailsContainer)
+    this.onBodyClickEvent = this.onBodyClickEvent || this.onModaslOverlayClick.bind(this);
+    this.detailsContainer.setAttribute('open', true);
     document.body.addEventListener('click', this.onBodyClickEvent);
     document.body.classList.add('overflow-hidden');
 
